@@ -3,3 +3,10 @@
 ################################################################################
 
 /.vs/CodingTest5June2021/v16/.suo
+/.vs/slnx.sqlite
+/CodingTestApp.Tests/obj
+/CodingTestApp.Tests/bin/Debug/net5.0
+/CodingTestApp.DataAdapter/obj
+/CodingTestApp.DataAdapter/bin/Debug/net5.0
+/CodingTestApp.Business/obj
+/CodingTestApp.Business/bin/Debug/net5.0
