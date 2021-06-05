@@ -7,7 +7,7 @@ namespace CodingTestApp.DataAdapter.Contracts
     {
         Task<TKey> Create(TEntity entity);
 
-        Task<TEntity> Update(TEntity entity);
+        Task Update(TEntity entity);
 
         Task<TEntity> GetById(TKey id);
 

@@ -43,7 +43,7 @@ namespace CodingTestApp.DataAdapter.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 

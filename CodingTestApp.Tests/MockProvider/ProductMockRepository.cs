@@ -65,7 +65,7 @@ namespace CodingTestApp.Tests.MockProvider
             return product;
         }
 
-        public async Task<ProductEntity> Update(ProductEntity entity)
+        public async Task Update(ProductEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 

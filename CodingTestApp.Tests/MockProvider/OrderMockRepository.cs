@@ -9,24 +9,24 @@ namespace CodingTestApp.Tests.MockProvider
 {
     public class OrderMockRepository : IOrderRepository
     {
-        private static List<OrderEntity> mockOrders;
+        private static Dictionary<decimal, OrderEntity> mockOrders;
 
         public OrderMockRepository()
         {
-            mockOrders = new List<OrderEntity>();
+            mockOrders = new Dictionary<decimal, OrderEntity>();
         }
 
         public async Task<decimal> Create(OrderEntity entity)
         {
             if (mockOrders.Any())
             {
-                entity.Id = mockOrders.Max(p => p.Id) + 1;
+                entity.Id = mockOrders.Max(p => p.Key) + 1;
             }
             else
             {
                 entity.Id = 1;
             }
-            mockOrders.Add(entity);
+            mockOrders.Add(entity.Id, entity);
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -53,25 +53,26 @@ namespace CodingTestApp.Tests.MockProvider
 
         public async Task<OrderEntity> GetById(decimal id)
         {
-            var order = mockOrders.FirstOrDefault(o => o.Id == id);
-
-            if(order == null)
+            if(!mockOrders.ContainsKey(id))
             {
                 throw new KeyNotFoundException();
             }
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            return order;
+            return mockOrders[id];
         }
 
-        public async Task<OrderEntity> Update(OrderEntity entity)
+        public async Task Update(OrderEntity entity)
         {
+            if (!mockOrders.ContainsKey(entity.Id))
+            {
+                throw new KeyNotFoundException();
+            }
+
+            mockOrders[entity.Id] = entity;
+
             await Task.Delay(TimeSpan.FromSeconds(1));
-
-            //Update using DB context code will go from here
-
-            throw new NotImplementedException();
         }
     }
 }

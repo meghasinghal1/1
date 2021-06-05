@@ -6,6 +6,8 @@ namespace CodingTestApp.DataAdapter.Entities
     {
         public string Number { get; set; }
 
+        public string PaymentTransactionNumber { get; set; }
+
         public virtual List<ProductEntity> Products { get; set; }
     }
 }

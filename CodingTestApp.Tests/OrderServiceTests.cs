@@ -54,16 +54,6 @@ namespace CodingTestApp.Tests
         }
 
         [Fact]
-        public void OrderServiceTests_WithNoPayment_ShouldThrowInternalError()
-        {
-            //Arrange
-
-            //Act
-
-            //Assert
-        }
-
-        [Fact]
         public void OrderServiceTests_WhenProductDeliveryTypeIsPhysical_ShouldGenerateAPackingSlipForShipping()
         {
             //Arrange

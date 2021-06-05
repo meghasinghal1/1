@@ -76,5 +76,16 @@ namespace CodingTestApp.Business.Services
 
             return orderModel;
         }
+
+        public async Task UpdatePaymentInfo(decimal orderId)
+        {
+            Random random = new Random();
+
+            var orderEntity = await orderRepository.GetById(orderId);
+
+            orderEntity.PaymentTransactionNumber = $"DUMMY-PAYPAL-{random.Next(1000, 9990)}";
+
+            await orderRepository.Update(orderEntity);
+        }
     }
 }
