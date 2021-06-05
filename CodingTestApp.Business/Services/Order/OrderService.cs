@@ -32,7 +32,8 @@ namespace CodingTestApp.Business.Services
             {
                 Number = $"DUMMY-ORDER-{random.Next(100, 999)}",
                 CreatedDate = DateTime.UtcNow,
-                CreatedBy = userIdentity.LoggedInUserId
+                CreatedBy = userIdentity.LoggedInUserId,
+                Products = new List<ProductEntity>()
             };
 
             foreach(var productId in model.Products)
@@ -42,8 +43,10 @@ namespace CodingTestApp.Business.Services
                 {
                     order.Products.Add(productEntity);
                 }
-
-                throw new KeyNotFoundException();
+                else
+                {
+                    throw new KeyNotFoundException();
+                }
             }
 
             var orderId = await orderRepository.Create(order);

@@ -20,7 +20,7 @@ namespace CodingTestApp.Tests.MockProvider
         {
             if (mockProducts.Any())
             {
-                entity.Id = mockProducts.Max(p => p.Id);
+                entity.Id = mockProducts.Max(p => p.Id) + 1;
             }
             else
             {

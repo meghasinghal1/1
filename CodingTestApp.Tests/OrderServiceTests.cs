@@ -32,15 +32,15 @@ namespace CodingTestApp.Tests
         public async Task OrderServiceTests_HappyPath_ShouldCreateAnOrder()
         {
             //Arrange
-            var product1Result = CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
-            var product2Result = CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
+            var product1Id = await CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
+            var product2Id = await CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
 
             var orderRequest = new OrderCreateModel
             {
                 Products = new List<int>
                 {
-                    product1Result.Id,
-                    product2Result.Id
+                    product1Id,
+                    product2Id
                 }
             };
 
