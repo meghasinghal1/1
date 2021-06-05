@@ -7,33 +7,33 @@ using System.Threading.Tasks;
 
 namespace CodingTestApp.Tests.MockProvider
 {
-    public class ProductMockRepository : IProductRepository
+    public class OrderMockRepository : IOrderRepository
     {
-        private static List<ProductEntity> mockProducts;
+        private static List<OrderEntity> mockOrders;
 
-        public ProductMockRepository()
+        public OrderMockRepository()
         {
-            mockProducts = new List<ProductEntity>();
+            mockOrders = new List<OrderEntity>();
         }
 
-        public async Task<int> Create(ProductEntity entity)
+        public async Task<decimal> Create(OrderEntity entity)
         {
-            if (mockProducts.Any())
+            if (mockOrders.Any())
             {
-                entity.Id = mockProducts.Max(p => p.Id);
+                entity.Id = mockOrders.Max(p => p.Id);
             }
             else
             {
                 entity.Id = 1;
             }
-            mockProducts.Add(entity);
+            mockOrders.Add(entity);
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
             return entity.Id;
         }
 
-        public async Task<ProductEntity> Delete(int id)
+        public async Task<OrderEntity> Delete(decimal id)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -42,7 +42,7 @@ namespace CodingTestApp.Tests.MockProvider
             throw new NotImplementedException();
         }
 
-        public async Task<List<ProductEntity>> GetAll()
+        public async Task<List<OrderEntity>> GetAll()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -51,21 +51,21 @@ namespace CodingTestApp.Tests.MockProvider
             throw new NotImplementedException();
         }
 
-        public async Task<ProductEntity> GetById(int id)
+        public async Task<OrderEntity> GetById(decimal id)
         {
-            var product = mockProducts.FirstOrDefault(o => o.Id == id);
+            var order = mockOrders.FirstOrDefault(o => o.Id == id);
 
-            if (product == null)
+            if(order == null)
             {
                 throw new KeyNotFoundException();
             }
 
             await Task.Delay(TimeSpan.FromSeconds(1));
 
-            return product;
+            return order;
         }
 
-        public async Task<ProductEntity> Update(ProductEntity entity)
+        public async Task<OrderEntity> Update(OrderEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 

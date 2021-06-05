@@ -1,5 +1,5 @@
 ﻿using CodingTestApp.Business.DomainModels.Product;
-using CodingTestApp.DataAdapter;
+using CodingTestApp.DataAdapter.Contracts;
 using CodingTestApp.DataAdapter.Entities;
 using System;
 using System.Threading.Tasks;
@@ -8,11 +8,11 @@ namespace CodingTestApp.Business.Services
 {
     public class ProductService
     {
-        private readonly ProductRepository productRepository;
+        private readonly IProductRepository productRepository;
         private readonly UserIdentityModel userIdentity;
 
         public ProductService(
-            ProductRepository productRepository,
+            IProductRepository productRepository,
             UserIdentityModel userIdentity)
         {
             this.productRepository = productRepository;
@@ -21,7 +21,7 @@ namespace CodingTestApp.Business.Services
 
         public async Task<int> Create(ProductCreateModel model)
         {
-            var product = await productRepository.Create(new ProductEntity
+            var productId = await productRepository.Create(new ProductEntity
             {
                 CategoryType = (int)model.CategoryType,
                 Name = model.Name,
@@ -30,7 +30,7 @@ namespace CodingTestApp.Business.Services
                 CreatedBy = userIdentity.LoggedInUserId
             });
 
-            return product.Id;
+            return productId;
         }
     }
 }

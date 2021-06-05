@@ -1,13 +1,13 @@
-﻿using CodingTestApp.DataAdapter.Entities;
+﻿using CodingTestApp.DataAdapter.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CodingTestApp.DataAdapter
+namespace CodingTestApp.DataAdapter.Repository
 {
-    public class ProductRepository : ICrudRepository<ProductEntity>
+    public abstract class RepositoryBase<TKey, TEntity> : ICrudRepository<TKey, TEntity>
     {
-        public async Task<int> Create(ProductEntity entity)
+        public async Task<int> Create(TEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -16,7 +16,7 @@ namespace CodingTestApp.DataAdapter
             throw new NotImplementedException();
         }
 
-        public async Task<ProductEntity> Delete(int id)
+        public async Task<TEntity> Delete(TKey id)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -25,7 +25,7 @@ namespace CodingTestApp.DataAdapter
             throw new NotImplementedException();
         }
 
-        public async Task<List<ProductEntity>> GetAll()
+        public async Task<List<TEntity>> GetAll()
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -34,7 +34,7 @@ namespace CodingTestApp.DataAdapter
             throw new NotImplementedException();
         }
 
-        public async Task<ProductEntity> GetById(int id)
+        public async Task<TEntity> GetById(TKey id)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 
@@ -43,7 +43,7 @@ namespace CodingTestApp.DataAdapter
             throw new NotImplementedException();
         }
 
-        public async Task<ProductEntity> Update(ProductEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 

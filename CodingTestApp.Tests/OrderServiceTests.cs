@@ -1,5 +1,9 @@
+using CodingTestApp.Business.DomainModels.Order;
 using CodingTestApp.Business.DomainModels.Product;
 using CodingTestApp.Business.Services;
+using CodingTestApp.Tests.MockProvider;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace CodingTestApp.Tests
@@ -7,27 +11,45 @@ namespace CodingTestApp.Tests
     public class OrderServiceTests
     {
         private readonly ProductService productService;
+        
+        private readonly OrderService orderService;
 
         public OrderServiceTests()
         {
-            productService = new ProductService();
+            var userIdentityModel = new UserIdentityModel
+            {
+                LoggedInUserId = 1,
+                LoggedInUserEmail = "ved_singhal@yahoo.com"
+            };
+
+            productService = new ProductService(new ProductMockRepository(), userIdentityModel);
+
+            orderService = new OrderService(new OrderMockRepository(), new ProductMockRepository(), userIdentityModel);
         }
 
         [Fact]
-        public void OrderServiceTests_HappyPath_ReturnsSuccessStatus()
+        public async Task OrderServiceTests_HappyPath_ShouldCreateAnOrder()
         {
             //Arrange
-            var request = new ProductCreateModel
+            var product1Result = CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
+            var product2Result = CreateProduct("Product 1", ProductCategoryType.Book, ProductDeliveryType.Physical);
+
+            var orderRequest = new OrderCreateModel
             {
-                Name = "Product 1",
-                CategoryType = ProductCategoryType.Book,
-                DeliveryType = ProductDeliveryType.Physical
+                Products = new List<int>
+                {
+                    product1Result.Id,
+                    product2Result.Id
+                }
             };
 
             //Act
-            await productService.Create(request);
+            var orderId = await orderService.Create(orderRequest);
 
             //Assert
+            var orderDetail = await orderService.GetById(orderId);
+
+            orderDetail.Shoul
         }
 
         [Fact]
@@ -128,6 +150,21 @@ namespace CodingTestApp.Tests
             //Act
 
             //Assert
+        }
+
+        private async Task<int> CreateProduct(
+            string productName,
+            ProductCategoryType productCategoryType,
+            ProductDeliveryType productDeliveryType)
+        {
+            var request = new ProductCreateModel
+            {
+                Name = productName,
+                CategoryType = productCategoryType,
+                DeliveryType = productDeliveryType
+            };
+
+            return await productService.Create(request);
         }
     }
 }

@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace CodingTestApp.DataAdapter
+namespace CodingTestApp.DataAdapter.Contracts
 {
-    public interface ICrudRepository<TEntity>
+    public interface ICrudRepository<TKey, TEntity>
     {
         Task<int> Create(TEntity entity);
 
         Task<TEntity> Update(TEntity entity);
 
-        Task<TEntity> GetById(int id);
+        Task<TEntity> GetById(TKey id);
 
         Task<List<TEntity>> GetAll();
 
-        Task<TEntity> Delete(int id);
+        Task<TEntity> Delete(TKey id);
     }
 }

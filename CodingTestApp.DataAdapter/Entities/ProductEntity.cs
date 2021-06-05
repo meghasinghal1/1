@@ -1,6 +1,6 @@
 ﻿namespace CodingTestApp.DataAdapter.Entities
 {
-    public class ProductEntity : BaseEntity
+    public class ProductEntity : BaseEntity<int>
     {
         public string Name { get; set; }
 

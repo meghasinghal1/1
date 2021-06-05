@@ -2,16 +2,12 @@
 
 namespace CodingTestApp.DataAdapter.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<TKey>
     {
-        public int Id { get; set; }
+        public TKey Id { get; set; }
 
         public int CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
-
-        public int LastModifiedBy { get; set; }
-
-        public DateTime LastModifiedDate { get; set; }
     }
 }
