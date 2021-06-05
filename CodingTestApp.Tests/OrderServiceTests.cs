@@ -2,6 +2,7 @@ using CodingTestApp.Business.DomainModels.Order;
 using CodingTestApp.Business.DomainModels.Product;
 using CodingTestApp.Business.Services;
 using CodingTestApp.Tests.MockProvider;
+using FluentAssertions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -49,7 +50,7 @@ namespace CodingTestApp.Tests
             //Assert
             var orderDetail = await orderService.GetById(orderId);
 
-            orderDetail.Shoul
+            orderDetail.Should().NotBeNull();
         }
 
         [Fact]

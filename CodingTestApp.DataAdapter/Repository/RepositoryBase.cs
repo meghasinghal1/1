@@ -7,7 +7,7 @@ namespace CodingTestApp.DataAdapter.Repository
 {
     public abstract class RepositoryBase<TKey, TEntity> : ICrudRepository<TKey, TEntity>
     {
-        public async Task<int> Create(TEntity entity)
+        public async Task<TKey> Create(TEntity entity)
         {
             await Task.Delay(TimeSpan.FromSeconds(1));
 

@@ -5,7 +5,7 @@ namespace CodingTestApp.DataAdapter.Contracts
 {
     public interface ICrudRepository<TKey, TEntity>
     {
-        Task<int> Create(TEntity entity);
+        Task<TKey> Create(TEntity entity);
 
         Task<TEntity> Update(TEntity entity);
 

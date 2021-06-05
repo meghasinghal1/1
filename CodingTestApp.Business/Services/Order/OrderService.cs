@@ -24,7 +24,7 @@ namespace CodingTestApp.Business.Services
             this.userIdentity = userIdentity;
         }
 
-        public async Task<int> Create(OrderCreateModel model)
+        public async Task<decimal> Create(OrderCreateModel model)
         {
             Random random = new Random();
 
